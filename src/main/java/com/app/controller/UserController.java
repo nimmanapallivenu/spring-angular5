@@ -1,0 +1,57 @@
+package com.app.controller;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.app.dto.UserDTO;
+import com.app.service.UserService;
+
+
+@RestController
+@RequestMapping(value = "/user")
+public class UserController {
+
+	@Autowired
+	private UserService userService;
+
+	@RequestMapping(value = "", method = RequestMethod.POST)
+	public UserDTO createUser(@RequestBody UserDTO userDTO) {
+
+		return userService.createUser(userDTO);
+	}
+
+	@RequestMapping(value = "/{userid}", method = RequestMethod.PUT)
+	public UserDTO updateUser(@PathVariable long userid,@RequestBody UserDTO userDTO) {
+
+		return userService.updateUser(userid, userDTO);
+	}
+
+	@RequestMapping(value = "", method = RequestMethod.GET)
+	public List<UserDTO> getUserList() {
+
+		return userService.getUsers();
+	}
+
+	/*@RequestMapping(value = "/{username}", method = RequestMethod.GET)
+	public UserDTO getUserByName(@PathVariable(name="username") String username) {
+		return userService.getUser(username);
+	}*/
+	
+	@RequestMapping(value = "/{userid}", method = RequestMethod.GET)
+	public UserDTO getUserid(@PathVariable(name="userid") long userid) {
+		return userService.getUser(userid);
+	}
+
+	@RequestMapping(value = "/{userid}", method = RequestMethod.DELETE)
+	public boolean deleteUser(@PathVariable long userid) {
+		userService.deleteUser(userid);
+		return true;
+	}
+
+}
