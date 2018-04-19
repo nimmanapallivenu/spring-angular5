@@ -9,7 +9,7 @@ import { Observable } from "rxjs/Observable";
 @Injectable()
 export class UserService {
 
- private apiUrl = 'http://localhost:9090/user';
+ private apiUrl = '/user';
  
  
 constructor(private http: HttpClient) { }

@@ -45,7 +45,12 @@ export class UserListComponent implements OnInit {
     if (user) {
       this.userService.deleteUserById(user.id).subscribe(
         status => {
-          this.getAllUsers();
+         
+          for (var i = 0; i < this.users.length; i++) {
+            if (this.users[i].id == user.id) {
+              this.users.splice(i, 1);
+            }
+          }
         },
         err => {
           console.log(err);

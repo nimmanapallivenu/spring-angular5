@@ -80,11 +80,13 @@ export class UserCreateComponent implements OnInit,OnDestroy {
         this.userForm.controls['pwd'].value,
         this.userForm.controls['email'].value,
 		this.userForm.controls['address'].value);
-        this.userService.saveUser(user).subscribe();
+        this.userService.saveUser(user).subscribe(data=>{
+          this.router.navigate(['/user']);
+        });
 		}
      }
       this.userForm.reset();
-      this.router.navigate(['/user']);
+     
   }
 
   redirectUserPage() {
